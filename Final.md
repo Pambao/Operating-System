@@ -71,15 +71,15 @@
     - Cooperating
   ## Exercise
 - 3.1 *Using the program shown in Figure 3.30, explain what the output will be at Line A*
-![Figure 3.30](Resource\Figure3.30.JPG)
+![Figure 3.30](Resource\Figure3_30.JPG)
     - The result is still 5 as the child updates it copied value. When control return to parent, the value is remain at 5.
 - 3.2 *Including the initial parent process, how many processes are created by the program shown in Figure 3.31?*
-![Figure 3.31](Resource\Figure3.31.JPG)
+![Figure 3.31](Resource\Figure3_31.JPG)
     - There are 8 processes created.
 - 3.5 *When a process creates a new process using fork() operation, which of the following state (stack, heap, shared memory segments) is shared between the parent processes and the child processes ?*
     - Only the shared memory segments are shared between the parent process and newly fork child processes. Copies of the stack and the heap are make for the newly created processes.
 - 3.14 *Using the program in Figure 3.34, identify the values of pid at lines A, B, C and D. (Assume that the actual pids of the parent and child are 2600, and 2603 respectively)*
-![Figure 3.34](Resource\Figure3.34.JPG)
+![Figure 3.34](Resource\Figure3_34.JPG)
     - A = 0
     - B = 2603
     - C = 2603
