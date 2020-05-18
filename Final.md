@@ -111,6 +111,7 @@
 - 4.2 *What are two differences between user-level threads and kernel-level threads? Under what circumstances is one type better than the other?*
     - User-level threads are unknown by the kernel, whereas kernel is aware if kernel threads
     - On system using either M:1 or M:M mapping, user threads are scheduled by the thread library and the kernel schedules kernel threads
+    - Kernel thread need not be associated with a process whereas every user thread belongs to a process. Kernel threads are generally more expensive to main 
 - 4.8
 - 4.15
  # Chapter 5:
