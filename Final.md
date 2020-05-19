@@ -110,78 +110,154 @@
     - An interactive GUI program such as a debugger where a thread is used to monitor user input, another thread represents the running application, and the third thread monitors performance. 
 - 4.2 *What are two differences between user-level threads and kernel-level threads? Under what circumstances is one type better than the other?*
     - User-level threads are unknown by the kernel, whereas kernel is aware if kernel threads
-    - On system using either M:1 or M:M mapping, user threads are scheduled by the thread library and the kernel schedules kernel threads
-    - Kernel thread need not be associated with a process whereas every user thread belongs to a process. Kernel threads are generally more expensive to main 
-- 4.8
-- 4.15
- # Chapter 5:
-  ## Review Question
-  - 5.2
-  - 5.3
-  - 5.4
-  - 5.25
-  ## Exercise
-  - 5.3
-  - 5.7
-  - 5.8
-  - 5.10
-  - 5.17
- # Chapter 6: 
-  ## Review Question
-  - 6.1
-  - 6.3
-  - 6.9
-  - 6.15
-  ## Exercise
-  - 6.2
-  - 6.16
-  - 6.17
-  - 6.19
- # Chapter 7:
-  ## Review Question
-  - 7.1
-  - 7.2
-  - 7.14
-  - 7.15
-  ## Exercise
-  - 7.1
-  - 7.4
-  - 7.11
-  - 7.20
- # Chapter 8:
-  ## Review Question
-  - 8.3
-  - 8.7
-  - 8.8
-  - 8.9
-  ## Exercise
-  - 8.3
-  - 8.8
-  - 8.21
- # Chapter 9:
-  ## Review Question
-  - 9.10
-  - 9.11
-  ## Exercise
-  - 9.3
-  - 9.4
-  - 9.6
-  - 9.6
- # Chapter 10:
-  ## Review Question
-  - 10.1
-  - 10.2
-  - 10.3
-  - 10.7
-  ## Exercise
-  - 10.7
-  - 10.12
- # Chapter 11:
-  ## Review Question
-  - 11.3
-  - 11.6
-  - 11.7
-  - 11.9
+    - On system using either M:1 or M:M mapping, user threads are scheduled by the thread library and the kernel schedules kernel threads.
+    - Kernel thread need not be associated with a process whereas every user thread belongs to a process. Kernel threads are generally more expensive to maintain than user threads as they must be represented with a kernel data structure.
+- 4.8 *Which of the following components of program state (Register values, Heap memory, Global variables, Stack memory) are shared across threads in a multithreaded process?*
+    - Heap memory
+    - Stack Variables
+- 4.15 *Consider the following code segment:*
+- a. How many unique processes are created?
+- b. How many unique threads are created?
+    - ![Figure 3.34](Resource/4.15.JPG)
+    - There are 5 unique processes and 2 unique threads are created
+# Chapter 5: Process Synchronization
+## Review Question
+- 5.2 *What is the term for describing the situation where shared data maybe manipulated concurrently and the outcome of executuion depends upond the order of access?*
+    - Race condition
+- 5.3 *What is the term used to describe the segment of code where shared data is accessed and possibly manipuldated?*
+    - Critical section
+- 5.4 *What are three requirements to a solution to the critical-section problem must satisfy?*
+    - Mutual Exclusion
+    _ Progress
+    _ Bounded Waiting
+- 5.25 *What are the four necessary conditions for characterizing deadlock?*
+    - Mutual exclusion: The resources involved must be unsharable; otherwise, the processes would not be prevented from using the resource when necessary.
+    - Hold and wait or partial allocation: The processes must hold the resources they have already been allocated while waiting for other requested resource. If the process had to release its resources when a new resources were requested, deadlock could not occur because the processes would not prevent others from using resources that it control.
+    - No pre-emption: The processes must not have resources taken away while that resource is being used. Otherwise, deadlock could not occur since the operating system could simply take enough resources from running processes to enable any processes to finish.
+    - Resource waiting or circular wait: A circular chain of processes with each process holding resources which are currently being requested by the next orcess in the chain, cannot exist. Otherwise,the cycle theorem (which states that "a cycle in the resource graph is necessary for deadlock to occur") indicated that deadlock could occur.
+## Exercise
+- 5.3 *What is the meaning of the term busy waiting? What other kinds of waiting are there in an operating system? Can busy waiting be avoided altogether? Explain your answer.*
+    - Busy waiting means that a process is waiting for a condition to be satisfied in a tight loop without relinquishing the processor. Alternatively, a process could wait by relinquishing the processor, and block on a condition and wait to be awakened at some appropriate time in the future. Busy waiting can be avoided but incurs the overhead associated with putting a process to sleep and having to wake it up when an appropriate program state is reached.
+- 5.7 *List three examples of deadlocks that are not related to a computer system environment.*
+    - Two cars crossing a single-lane brigde from opposite direction.
+    - A person going down a ladder while another person is climbing up the ladder.
+    - Two train traveling toward each other on the same track.
+- 5.8 *Is it possible to have a deadlock involving only a single process? Explain your answer.*
+    - No. it follows directly from the hold-and-wait condition.
+- 5.10 *The first known correct software solution to the critical-section problem for two processes was developed by Deckker. The two processes, P0 and P1, share the following variables:*
+    - ``boolean flag[2]; /* initially false*/
+int turn;``
+- The structure of process Po (i == 0 or 1) is shown in Figure 5.25. The other process is Pj (j == 0 or 1). Prove that the algorithm satisfies all three requirements for the critical-section problem
+    - ![Figure 3.34](Resource/Figure3_34.JPG)
+- 5.17 *Consider how to implement a mutex lock using an atomic hardware instruction. Assume that the following structure defining the mutex lock is available*
+    - ``typedef struct {int available;}lock;`` 
+- (available == 0 ) indicates that the lock is available, and a value of 1 indicates that the lock is unavailable. Using this struct, illustrate how the following functions can be implemented using the test_and_set() and compare_and_swap() instructions:
+    - ``void acquire (lock *mutex)``
+    - ``void release (lock *mutex)``  
+# Chapter 6: CPU Scheduling
+## Review Question
+- 6.1 *What are the two bursts that CPU schedulers are designed around?*
+    - I/O Burst
+    - CPU Burst
+- 6.3 *List at least three different criteria for designing a CPU scheduling algorithm.*
+    - CPU Utilization
+    - Throughput
+    - Turnaround Time
+    - Waiting Time
+    - Response Time
+- 6.9 *What are the two types of contention scope for thread scheduling?*
+    - Process-Contention Scope
+    - System-Contention Scope
+- 6.15 *What real-time scheduling algorithm uses deadline as its scheduling criteria?*
+    - Earliest-Dealine-Frist (EDF)
+## Exercise
+- 6.2
+- 6.16
+- 6.17
+- 6.19
+# Chapter 7: Memory management
+## Review Question
+- 7.1 *What two registers can be used to provide a simple form of memory protection?*
+    - Relocation register
+    - Limit register
+- 7.2 *List the three different times at which address binding may occur.*
+    - Compile time
+    - Load time
+    - Execution time
+- 7.14 *If a page offset is 13 bits, how large (in bytes) is the page?*
+    - 8,192 bytes (8KB)
+- 7.15 *How many entries are in a two-level page table with a 20-bit page number?*
+    - 1,048,576
+## Exercise
+- 7.1
+- 7.4
+- 7.11
+- 7.20
+# Chapter 8: Virtual memory
+## Review Question
+- 8.3 *When does a page fault occur?*
+    - A page fault occurs when a process tries to access a page that has not been brought into physical memory.
+- 8.7 *What is the simplest page replacement algorithm?*
+    - First in First out (FIFO) algorithm.
+- 8.8 *What is the name of the page replacement algorithm that operates by replacing the page that will not be used for the longest period of time?*
+    - Optimal Page Replacement (OPT).
+- 8.9 *What page replacement algorithm could be implemented using a stack or counters?*
+    - Least Recently Used (LRU) algorithm.
+## Exercise
+- 8.3
+- 8.8
+- 8.21
+# Chapter 9: Mass-Storage Structure
+## Review Question
+- 9.3 *What is the term for the smallest unit of transfer between a disk?*
+    - Logical block
+- 9.4 *What are the two ways a computer can access disk storage?*
+    - Host-attached storage
+    - Network-attached storage
+- 9.5 *List the three general disk scheduling algorithm.*
+    - First come first serve
+    - Shortest seek time first
+    - Scan
+- 9.6 *What disk scheduling algorithm is typically used with SSDs?*
+    - First come first serve
+## Exercise
+- 9.10
+- 9.11
+# Chapter 10: File-System Interface
+## Review Question
+- 10.1 *List at least three attributes of a file.*
+    - Name
+    - Identifier (unique tag, normally a numebr)
+    - Type
+    - Location
+    - Size
+- 10.2 *List at least three operations that maybe performed on a file*
+    - Create a file
+    - Write to a file
+    - Read a file
+    - Delete a file
+    - Truncate a file (erase the contents of a file, but retain the attributes)
+- 10.3 *What are the two fundamental ways of accessing a file?*
+    - Sequential Access - process information on the file one record after another
+    - Direct Access (AKA Relative Access) - Read and write logical records rapidly in no particular order
+- 10.7 *If a mount point is /home and the device jane/programs is mounted on the mount point, what is the complete path name to access the program directory?*
+    - /home/jane/program
+## Exercise
+- 10.7
+- 10.12
+# Chapter 11: File-System Implementation
+## Review Question
+- 11.3 *What is the UNIX term for a file control block?*
+    - Inode
+- 11.6 *What are two general approaches for implementing a directory?* 
+    - Linear list - list of file names with pointers to the data blocks.
+    - Hash table - linear list stores directory entries, but a hash data structure is used, greatly reducing directpry search time.
+- 11.7 *Provide at least two different approaches for allocating disk blocks to files.*
+    - Contiguous Allocation -each file occupies a set of contiguous blocks.
+    - Linked Allocation - each file is a linked list of disk blocks, which may be scattered anywhere on the disk.
+    - Indexed Allocation - provides an index block that consolidates all of the file pointers together into one location, the index block.
+- 11.9 *What would the bit vector appear as if block 0, 3, 4 and 6 were free?*
+    - 1001101
  
  
  
