@@ -118,7 +118,7 @@
 - 4.15 *Consider the following code segment:*
 - a. How many unique processes are created?
 - b. How many unique threads are created?
-    - ![Figure 3.34](Resource/4.15.JPG)
+    - ![Figure 4.15](Resource/4.15.JPG)
     - There are 5 unique processes and 2 unique threads are created
 # Chapter 5: Process Synchronization
 ## Review Question
@@ -148,7 +148,7 @@
     - ``boolean flag[2]; /* initially false*/
 int turn;``
 - The structure of process Po (i == 0 or 1) is shown in Figure 5.25. The other process is Pj (j == 0 or 1). Prove that the algorithm satisfies all three requirements for the critical-section problem
-    - ![Figure 3.34](Resource/Figure5_25.JPG)
+    - ![Figure 5.25](Resource/Figure5_25.JPG)
        - Mutual exclusion: is ensured through the use of flag and turn variables. If both process set their flag to true, only one will succeed. Namely, the process whose turn it is. The waiting process can only enter its critical section when the other process updates the value of turn.
        - Progress is provided, again through the flag and turn variable, this algorithm does not provide strict alternation. Rather, if a process wishes to access their critical section, it can set their flag to true to enter critical section. It can only set turn of other process upon exiting its critical section.
        - Bounded waiting is preserved through the use of turn variable. Assume 2 proceess wish to enter their respective critical sections. They both set their flag to true, however only the thread whose turn it is can process, the other process waits. If bounded waiting were not preserved, it would therefore possible that the waiting process would have to wait indefinitely while the first process repeatedly entered and exited its critical section. However, Dekker's algorithm has a process set that value of turn to the other process, thereby ensuring thast the other prcess will enter its critical section next.
@@ -157,7 +157,7 @@ int turn;``
 - (available == 0 ) indicates that the lock is available, and a value of 1 indicates that the lock is unavailable. Using this struct, illustrate how the following functions can be implemented using the test_and_set() and compare_and_swap() instructions:
     - ``void acquire (lock *mutex)``
     - ``void release (lock *mutex)``
-    - ![Figure 3.34](Resource/Ans5_17.JPG)
+    - ![Answer5.17](Resource/Ans5_17.JPG)
 # Chapter 6: CPU Scheduling
 ## Review Question
 - 6.1 *What are the two bursts that CPU schedulers are designed around?*
@@ -179,16 +179,16 @@ int turn;``
     - Preemptive scheduling allows a process to be interupted in the midst of it execution, taking CPU away and allocating it to another process.
     - Non-preemptive scheduling ensures that a process relinquishes control of the CPU only when it finishes with its current CPU burst.
 - 6.16
-    -  ![Figure 3.34](Resource/Ques6_16.JPG)
+    -  ![Question6.16](Resource/Ques6_16.JPG)
     - **Hand wirte**
 - 6.17
-    - ![Figure 3.34](Resource/Ques6_17.JPG)
+    - ![Question6.17](Resource/Ques6_17.JPG)
     - **Hand wirte**
 - 6.19 *Which of the following scheduling algorithms could result in starvation?*
-    - Fist-come-frist-serve
-    - Shortest-job-frist
-    - Round-robin
-    - Priority
+- Fist-come-frist-serve
+- Shortest-job-frist
+- Round-robin
+- Priority
     - First-come-first-serve and priority could result in starvation since job with the long burst time can be executed first then other job will be waiting in such a long time
 # Chapter 7: Memory management
 ## Review Question
@@ -212,7 +212,12 @@ int turn;``
     - Number of bits in logical address: 6 + 10 = 16
     - Number of bít in the physical address: 5 + 10 = 15 
 - 7.11
+    - ![Question7.11](Resource/Ques7_11.JPG)
+    - ![Answer7.11.A](Resource/Ans7_11_A.JPG)
+    - ![Answer7.11.B](Resource/Ans7_11_B.JPG)
 - 7.20
+    - ![Figure 3.34](Resource/Ques7_20.JPG)
+    - ![Figure 3.34](Resource/Ans7_20.JPG)
 # Chapter 8: Virtual memory
 ## Review Question
 - 8.3 *When does a page fault occur?*
@@ -225,8 +230,17 @@ int turn;``
     - Least Recently Used (LRU) algorithm.
 ## Exercise
 - 8.3
+    - ![Question8.3](Resource/Ques8_3.JPG)
+    - 9EF -> 0EF
+    - 111 -> 211
+    - 700 -> D00
+    - 0FF -> ÉFF
 - 8.8
+    - ![Question8.8](Resource/Ques8_8.JPG)
+    - ![Answer8.8](Resource/Ans8_8.JPG)
 - 8.21
+    - ![Question8.21](Resource/Ques8_21.JPG)
+    - ![Answer8.21](Resource/Ans8_21.JPG)
 # Chapter 9: Mass-Storage Structure
 ## Review Question
 - 9.3 *What is the term for the smallest unit of transfer between a disk?*
@@ -243,7 +257,9 @@ int turn;``
 ## Exercise
 - 9.10 *Expalin why SSDs often use an FCFS disk-scheduling algorithm.*
     - Because SSDs do not have moving parts and therefore its performance is intensive to issues such as seek time and rotational latency. Therefor, a simple FCFS policy willl suffice. 
-- 9.11
+- 9.11 
+    - ![Question9.11](Resource/Ques9_11.JPG)
+    - ![Answer9.11](Resource/Ans9_11.JPG)
 # Chapter 10: File-System Interface
 ## Review Question
 - 10.1 *List at least three attributes of a file.*
